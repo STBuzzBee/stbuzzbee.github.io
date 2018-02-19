@@ -1,9 +1,32 @@
 <!DOCTYPE html>
 <html>
+<head>
+<title>Steven Busby</title>
+</head>
 <body>
 <h1>Steven Busby</h1>
 <p>The web portfolio</p>
 <br>
 <p>This things still under construction. Maybe come back another time?</p>
+<p>For now, enjoy some colors</p>
+<div id="colorBox" style="border: 3px solid; width: 300px; height: 300px;"></div>
 </body>
+<script>
+newColor();
+
+var refresher = window.setInterval(newColor, 1000);
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+function newColor() {
+	document.getElementById("colorBox").style.background = getRandomColor();
+}
+</script>
 </html>
