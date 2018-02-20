@@ -3,6 +3,15 @@
 <head>
 <title>Steven Busby</title>
 </head>
+<style>
+#colorBox {
+   -webkit-transition:background .5s ease;
+   -moz-transition:background .5s ease;
+   -o-transition:background .5s ease;
+   transition:background .5s ease;
+   background: blue;
+}
+</style>
 <body>
 <h1>Steven Busby</h1>
 <p>The web portfolio</p>
@@ -12,9 +21,39 @@
 <div id="colorBox" style="border: 3px solid; width: 300px; height: 300px;"></div>
 </body>
 <script>
-newColor();
 
-var refresher = window.setInterval(newColor, 1000);
+var id = toggle_color(document.getElementById("colorBox").style.background, getRandomColor(), 500);
+    
+function toggle_color(color1, color2, time) {
+  var $selector = document.getElementById("colorBox");
+  setTransitionDurations($selector, time)
+  $selector.style.background = $selector.style.background === color1 ? color2 : color1; 
+  console.log($selector.style.background)
+  var intervalId = setInterval(function() {
+  
+    var newColor = getRandomColor();
+    $selector.style.background = $selector.style.background === color1 ? newColor : color1; 
+
+  }, time);
+  return intervalId;
+}
+
+function getStringFromMs(ms) {
+  // convert ms to string
+  // i.e. 1000 => '1ms'
+  return ms + 'ms';
+}
+  
+function setTransitionDurations($selector, ms) {
+  var transitionSeconds = getStringFromMs(ms);
+  // you need to set the transition for 
+  // each browser for max compatibility
+  var prefixes = ['-webkit', '-o', '-moz'];
+  prefixes.forEach(function(prefix) {
+    $selector.style.setProperty(prefix + '-transition-duration', transitionSeconds);
+  })
+  $selector.style.transitionDuration = transitionSeconds;
+}
 
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
@@ -25,8 +64,5 @@ function getRandomColor() {
   return color;
 }
 
-function newColor() {
-	document.getElementById("colorBox").style.background = getRandomColor();
-}
 </script>
 </html>
