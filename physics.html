@@ -136,7 +136,8 @@ var mouse = Mouse.create(render.canvas),
     }
 });
 
-
+mouse.element.removeEventListener("mousewheel", mouse.mousewheel);
+mouse.element.removeEventListener("DOMMouseScroll", mouse.mousewheel);
 
 console.log(mouse);
 
