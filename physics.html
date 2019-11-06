@@ -68,6 +68,7 @@ function rev() {
 }
 */
 
+
 function droplet(x, y) {
 	if (numDrops > 800) {
 	
@@ -78,7 +79,7 @@ function droplet(x, y) {
 				color = '#bbbbbb';
 				break;
 			case 2:
-				color = '#777777';
+				color = '#0b9988';
 				break;
 			case 3: 
 				color = '#333333';
@@ -122,8 +123,8 @@ Engine.run(engine);
 // run the renderer
 Render.run(render);
 
-engine.world.gravity.x = .0;
-engine.world.gravity.y = .0;
+engine.world.gravity.x = 0;
+engine.world.gravity.y = 0;
 
 var mouse = Mouse.create(render.canvas),
 	mouseConstraint = MouseConstraint.create(engine, {

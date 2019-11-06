@@ -9,8 +9,8 @@
 <body style="background-color: #BBBBBB;">
 <div style="overflow-x: hidden; " height="100%" style="top: 0px; left: 0px; position: absolute;">
 	<div class="row" height="100%">
-		<div class="col-2" height="100%">
-		<object width="100%" height="100%" data="physics.html"></object>
+		<div class="col-2" height="100%" style="overflow: hidden;">
+		<object width="100%" height="100%" style="overflow: hidden;" data="physics.html"></object>
 		</div>
 		<div class="col-8">
 			<br>
@@ -27,9 +27,9 @@
 				</div>
 				<div class="col-1"></div>
 				<div class="col-6 animated wow fadeInDown" data-wow-delay=".2s">
-					<h1>About Me</h1>
+					<h1 color="#0b9988">About Me</h1>
 					<p>
-						I am a freshman at Virginia Tech, studying Physics and Computer Science. I do software development, microelectronics, and web development. Additionally, I play the trombone in the Marching Virginians and the VT Symphony Band.
+						I am a sophomore at Virginia Tech, studying Physics and Computer Science. I do software development, microelectronics, and web development. Additionally, I play the trombone in the Marching Virginians and the VT Symphony Band.
 					</p>
 				</div>
 				<div class="col-1"></div>
@@ -50,30 +50,28 @@
 						<div class="carousel-inner" style="min-height: 300px; max-height: 300px;">
 							<div class="carousel-item active">
 								<div class="row">
-									<div class="col-1"></div>
-									<div class="col-4">
-										<img src="media/defaultImage.png" class="img-thumbnail">
-									</div>
+									<div class="col-3"></div>
 									<div class="col-6">
-										<h2>My Site</h2>
+										<center><h2>My Site</h2>
 										<p>
 											This site is custom made from scratch. It is built with bootstrap, JQuery, and MatterJS. Try clicking and dragging the shapes along the sides of the site.
 										</p>
+										</center>
 										<br>
 									</div>
-									<div class="col-1"></div>
+									<div class="col-3"></div>
 								</div>
 							</div>
 							<div class="carousel-item">
 								<div class="row">
 									<div class="col-1"></div>
 									<div class="col-4">
-										<img src="media/defaultImage.png" class="img-thumbnail">
+										<img src="media/rscout_home.png" class="img-thumbnail">
 									</div>
 									<div class="col-6">
 										<h2>rScout app</h2>
 										<p>
-											rScout 
+											A data collection app and custom server system used in the FIRST Robotics Competition.
 										</p>
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rscoutModal">
 											More Details
@@ -124,13 +122,9 @@
 				</div>
 				<div class="col-1"></div>
 				<div class="col-6 animated wow fadeInDown" data-wow-delay=".2s">
-					<h1>More info coming soon</h1>
+					<h1>Resume</h1>
 					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec ornare magna. Duis condimentum, justo sed vestibulum finibus, 
-						erat lorem faucibus ipsum, et vulputate est mauris vel erat. Cras ultricies sed nulla sit amet aliquet. Nulla lectus tellus, 
-						imperdiet nec dolor at, euismod dictum enim. Sed eget luctus est, non laoreet turpis. Fusce a mauris in mauris rhoncus finibus. 
-						Quisque id diam ornare, pulvinar odio eget, ultricies augue. Maecenas aliquam neque at ex ultrices pretium. Vivamus nibh lectus, 
-						tincidunt quis molestie nec, pulvinar ut lacus.
+						File link coming soon!
 					</p>
 				</div>
 				<div class="col-1"></div>
@@ -140,14 +134,14 @@
 			<div class="row">
 				<div class="col-12">
 					<center>
-						Email: <a href="mailto:steventbusby@gmail.com">steventbusby@gmail.com</a>
+						Email: <a href="mailto:steventbusby@gmail.com" color="0b9988">steventbusby@gmail.com</a>
 					</center>
 				</div>
 				&nbsp;
 			</div>
 		</div>
-		<div class="col-2">
-		<object width="100%" height="100%" data="physics.html"></object>
+		<div class="col-2" style="overflow: hidden;">
+		<object width="100%" height="100%" style="overflow: hidden;" data="physics.html"></object>
 		</div>
 	</div>
 <script type="text/javascript" src="mdb/js/jquery-3.3.1.min.js"></script>
@@ -190,8 +184,9 @@ window.onbeforeunload = function(){ window.scrollTo(0,0);}
 				</button>
 			</div>
 			<div class="modal-body">
-				<object width="800" height="400"></object>
-				Lorem ipsum doler
+				<img width="800" height="400" src="media/rscout_field.png">
+				The rScout system is an android app used for the FIRST Robotics Competition. In these competitions, high school teams build robots to compete in a sports like game. The competition is divided into two parts, qualifications and eliminations. Teams performance in the qualification rounds determine their placement for eliminations, and the top 8 teams particiapte in a draft of the remaining teams to determine alliances for the elimination bracket.
+				This app allows the collection of data to make more informed decision during the draft portion of the competition, as well as be more prepared for individual opponents. The system operates by taking data through custom UI elements which mimic the playing field, packaging data about an individual match, and storing the data on a standalone server hosted on a Raspberry Pi. The entire system works completely offline and independently, with internet capabilities to pull event information and work wirelessly when available.
 			</div>
 		</div>
 	</div>
