@@ -1,0 +1,238 @@
+<head>
+
+</head>
+
+<body>
+
+<button onClick="displayPrompt('easy')">Easy Prompt</button>
+<button onClick="displayPrompt('normal')">Normal Prompt</button>
+<button onClick="displayPrompt('hard')">Hard Prompt</button>
+<div id="promptOutput">
+
+</div>
+<script>
+	
+	var MONO_COLORS = [["White"], ["Blue"], ["Black"], ["Red"], ["Green"]];
+	var DUO_COLORS = [["White", "Blue"],["White", "Black"],["White", "Red"],["White", "Green"],["Blue", "Black"],["Blue", "Red"],["Blue", "Green"],["Black", "Red"],["Black", "Green"],["Red", "Green"]];
+	var TRI_COLORS = [["White", "Blue", "Black"],["White", "Black", "Red"],["White", "Red", "Green"],["White", "Green", "Blue"],["Blue", "Black", "Red"],["Blue", "Red", "White"],["Blue", "Green", "Black"],["Black", "Red", "Green"],["Black", "Green", "White"],["Red", "Green", "Blue"]];
+	var QUAD_COLORS = [["Blue", "Black", "Red", "Green"],["White", "Black", "Red", "Green"],["White", "Blue", "Red", "Green"],["White", "Blue", "Black", "Green"],["White", "Blue", "Black", "Red"]];
+	var ALL_COLORS = [["White", "Blue", "Black", "Red", "Green"]];
+	
+	var COLOR_COMBOS = [MONO_COLORS, DUO_COLORS, TRI_COLORS, QUAD_COLORS, ALL_COLORS];
+	
+	var EASY_CMCS = [];
+	for (var i = 1; i < 8; i++) {
+		EASY_CMCS.push("has a CMC of " + i);
+	}
+	
+	var NORMAL_CMCS = [];
+	for (var i = 0; i < 10; i++) {
+		NORMAL_CMCS.push("has a CMC of " + i);
+	}
+	
+	var HARD_CMCS = [];
+	for (var i = 0; i < 2; i++) {
+		HARD_CMCS.push("has a CMC of " + i);
+	}
+	for (var i = 6; i < 12; i++) {
+		HARD_CMCS.push("has a CMC of " + i);
+	}
+	
+	var CARD_TYPES = ["creature", "artifact", "instant", "sorcery", "planeswalker", "enchantment"];
+	
+	var WHITE_PRIMARY = ["has a Banisher Priest effect", "blocks extra creatures" ,"prevents attacking"];
+	var WHITE_SECONDARY = ["destroys artifacts", "bounces", "bounces to library"];
+	var WHITE_TERTIARY = ["animates lands", "counts basic lands you control", "draws cards"];
+	
+	var WHITE_ABILITIES = [WHITE_PRIMARY, WHITE_SECONDARY, WHITE_TERTIARY];
+	
+	var BLUE_PRIMARY = ["bounces", "bounces to library", "can't be blocked"];
+	var BLUE_SECONDARY = ["counts basic lands you control", "has a Banisher Priest effect", "can't be countered"];
+	var BLUE_TERTIARY = ["animates lands", "deals damage when blocked", "grants +N/+0"];
+	
+	var BLUE_ABILITIES = [BLUE_PRIMARY, BLUE_SECONDARY, BLUE_TERTIARY];
+	
+	var BLACK_PRIMARY = ["makes players sacrifice creatures repeatedly", "counts basic lands you control", "can't block"];
+	var BLACK_SECONDARY = ["draws cards", "deals damage when blocked", "destroys tapped creatures"];
+	var BLACK_TERTIARY = ["animates lands", "changes colors", "gives +N/+N to your creatures"];
+	
+	var BLACK_ABILITIES = [BLACK_PRIMARY, BLACK_SECONDARY, BLACK_TERTIARY];
+	
+	var RED_PRIMARY = ["destroys artifacts", "counts basic lands you control", "can't be countered"];
+	var RED_SECONDARY = ["animates lands", "bounces", "can't block"];
+	var RED_TERTIARY = ["grants -N/-N", "grants +N/+N to your creatures", "has flash"];
+	
+	var RED_ABILITIES = [RED_PRIMARY, RED_SECONDARY, RED_TERTIARY];
+	
+	var GREEN_PRIMARY = ["animates lands", "destroys artifacts", "counts basic lands you control"];
+	var GREEN_SECONDARY = ["has a Banisher Priest effect", "prevents attacking", "draws cards"];
+	var GREEN_TERTIARY = ["grants +N+0", "grants -N/-N", "has flying"];
+	
+	var GREEN_ABILITIES = [GREEN_PRIMARY, GREEN_SECONDARY, GREEN_TERTIARY];
+	
+	printPrompt("easy");
+	console.log("-=-=-=-=-==-=-=-=-");
+	printPrompt("normal");
+	console.log("-=-=-=-=-==-=-=-=-");
+	printPrompt("hard");
+	console.log("-=-=-=-=-==-=-=-=-");
+	
+	function displayPrompt(diff) {
+		var col = pickColors(diff);
+		var pick = decideAbilities(col, diff);
+		var finished = assemblePrompt(col, pick, diff);
+		document.getElementById("promptOutput").innerHTML = finished;
+	}
+	
+	function printPrompt(diff) {
+		var col = pickColors(diff);
+		console.log(col);
+		var pick = decideAbilities(col, diff);
+		console.log(pick);
+		
+		console.log("[][][][][][][][][][][][][][][][][][][][]");
+		console.log(assemblePrompt(col, pick, diff));
+		console.log("[][][][][][][][][][][][][][][][][][][][]");
+	}
+	
+	function assemblePrompt(colors, abilities, difficulty) {
+		var stri = "Your " + difficulty + " prompt is to make a " + stringTogether(colors) + " " + randElement(CARD_TYPES) + " that " + stringTogether(abilities);
+		return stri;
+	} 
+	
+	function decideAbilities(colors, diff) {
+
+		var avail = [];
+		var relationVariance = [];
+		var numAbilities = 0;
+		
+		console.log("AH");
+		
+		switch (diff) {
+			case "easy":
+				relationVariance = [0,0,0,0,1];
+				numAbilities = 1;
+				break;
+			case "hard":
+				relationVariance = [0,1,1,2,2,2];
+				numAbilities = getRandomInt(2,3);
+				break;
+			case "normal":
+			default:
+				relationVariance = [0,0,1,1,2];
+				numAbilities = 2;
+				break;
+		}
+		
+		console.log(numAbilities);
+		console.log(relationVariance);
+		
+		for (var color in colors) {
+			switch (diff) {
+				case "easy":
+					avail = avail.concat(EASY_CMCS);
+					avail = avail.concat(EASY_CMCS);
+					break;
+				case "hard":
+					avail = avail.concat(HARD_CMCS);
+					break;
+				case "normal":
+				default:
+					avail = avail.concat(NORMAL_CMCS);
+					break;
+			}
+			
+			switch (colors[color]) {
+				case "White":
+					for (var variance in relationVariance) {
+						avail = avail.concat(WHITE_ABILITIES[relationVariance[variance]]);
+					}
+					break;
+				case "Blue":
+					for (var variance in relationVariance) {
+						avail = avail.concat(BLUE_ABILITIES[relationVariance[variance]]);
+					}
+					break;
+				case "Black":
+					for (var variance in relationVariance) {
+						avail = avail.concat(BLACK_ABILITIES[relationVariance[variance]]);
+					}
+					break;
+				case "Red":
+					for (var variance in relationVariance) {
+						avail = avail.concat(RED_ABILITIES[relationVariance[variance]]);
+					}
+					break;
+				case "Green":
+					for (var variance in relationVariance) {
+						avail = avail.concat(GREEN_ABILITIES[relationVariance[variance]]);
+					}
+					break;
+			}
+		}
+		
+		console.log(avail);
+		
+		var ret = pickAbilities(numAbilities, avail);
+		
+		return ret;
+	}
+	
+	function pickColors(diff) {
+		available = [];
+		//console.log(diff);
+		switch (diff) {
+			case "easy":
+				available = available.concat(COLOR_COMBOS[0]);
+				available = available.concat(COLOR_COMBOS[1]);
+				available = available.concat(COLOR_COMBOS[4]);
+				break;
+			case "hard":
+				available = available.concat(COLOR_COMBOS[1]);
+				available = available.concat(COLOR_COMBOS[2]);
+				available = available.concat(COLOR_COMBOS[3]);
+				break;
+			case "normal":
+			default:
+				available = available.concat(COLOR_COMBOS[0]);
+				available = available.concat(COLOR_COMBOS[1]);
+				available = available.concat(COLOR_COMBOS[2]);
+				available = available.concat(COLOR_COMBOS[4]);
+				break;
+		}
+		//console.log(available);
+		return randElement(available);
+	}
+	
+	function stringTogether(abilities) {
+		var stri = "";
+		for (var i = 0; i < abilities.length - 1; i++) {
+			stri += abilities[i];
+			stri += " and ";
+		}
+		stri += abilities[abilities.length - 1];
+		return stri;
+	}
+	
+	function pickAbilities(num, abilities) {
+		var fin = [];
+		
+		for (var i = 0; i < num; i++) {
+			fin.push(randElement(abilities));
+		}
+		
+		return fin;
+	}
+	
+	function randElement(arr) {
+		return arr[getRandomInt(0, arr.length - 1)]
+	}
+	
+	function getRandomInt(min, max) {
+		min = Math.ceil(min);
+		max = Math.floor(max);
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+</script>
+
+</body>
