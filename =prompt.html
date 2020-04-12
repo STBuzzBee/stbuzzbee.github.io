@@ -40,9 +40,9 @@
 	
 	var CARD_TYPES = ["creature", "artifact", "instant", "sorcery", "planeswalker", "enchantment"];
 	
-	var WHITE_PRIMARY = ["has a Banisher Priest effect", "blocks extra creatures" ,"prevents attacking"];
-	var WHITE_SECONDARY = ["destroys artifacts", "bounces", "bounces to library"];
-	var WHITE_TERTIARY = ["animates lands", "counts basic lands you control", "draws cards"];
+	var WHITE_PRIMARY = ["has a Banisher Priest effect", "blocks extra creatures" ,"prevents attacking", "brings back creatures that died this turn", "prevents losing the game", "destroys attacking or blocking creatures", "destroys creatures that damaged this turn", "destroys tapped creatures", "destroys creatures with power 4 or greater", "destroys all creatures", "grants +N/+N", "grants -N/+N", "grants +0/+N", "prevents damage", "redirects damage", "uses defender", "deals damage to attacking or blocking creatures", "uses double strike", "destroys enchantments", "exiles cards from graveyards", "uses first strike", "flickers", "uses flying", "cares about enchantments", "has a Gaseous Form effect", "uses indestructible", "gains life", "uses lifelink", "prevents a named spell from being played", "uses a pacifism effect", "prevents actions", "uses protection", "puts enchantments onto the battlefield", "puts planeswalkers onto the battlefield", "returns enchantments to your hand", "taps creatures", "has a tax effect", "creates tokens", "tutors for an enchantment", "tutors for a planeswalker", "uses vigilance"];
+	var WHITE_SECONDARY = ["destroys artifacts", "bounces", "bounces to library", "grants +N/+N", "grants +N/+0", "does damage to multiple targets", "cares about artifacts", "cares about creatures", "cares about lands", "increases counters or tokens", "puts artifacts onto the battlefield", "reanimates creatures", "returns artifacts to your hand", "returns creatures to your hand", "scries", "tutors for an artifact", "tutors for a creature", "untaps creatures", "prevents you from losing the game"];
+	var WHITE_TERTIARY = ["animates lands", "counts basic lands you control", "draws cards", "changes colors", "counters spells", "grants -N/+N", "drains life", "grants extra attacks", "uses flash", "fogs", "uses hexproof", "destroys lands", "has a Lhurgoyf effect", "uses prowess", "puts creatures onto the battlefield", "uses reach", "uses trample", "tutors for a land"];
 	
 	var WHITE_ABILITIES = [WHITE_PRIMARY, WHITE_SECONDARY, WHITE_TERTIARY];
 	
@@ -64,9 +64,9 @@
 	
 	var RED_ABILITIES = [RED_PRIMARY, RED_SECONDARY, RED_TERTIARY];
 	
-	var GREEN_PRIMARY = ["animates lands", "destroys artifacts", "counts basic lands you control"];
-	var GREEN_SECONDARY = ["has a Banisher Priest effect", "prevents attacking", "draws cards"];
-	var GREEN_TERTIARY = ["grants +N+0", "grants -N/-N", "has flying"];
+	var GREEN_PRIMARY = ["animates lands", "destroys an artifact", "counts Forests", "counts basic land types", "can't be countered", "destroys a flier", "gives +N/+N", "gives +N/+0", "gives +0/+N", "enters with X +1/+1 counters", "uses "can't be blocked by creatures with power 2 or less"", "deals damage to fliers", "destroys an enchantment", "makes creatures fight", "makes creatures one-sided fight", "fogs damage", "cares about number of creatures", "cares about total power of creatures", "cares about lands", "cares about tokens", "cares about creatures in your graveyard", "gains life", "forces blocks", "cares about cards in your hand", "produces mana", "lets you play extra lands", "puts permanents from your hand into play", "puts lands from your hand into play", "uses reach", "puts cards from your graveyard into your library", "regrows lands", "regrows cards", "uses "can't be blocked by more than one creature"", "uses Unstoppable (can deal damage as though it weren't blocked)", "generates tokens", "uses trample", "tutors for creatures", "tutors for lands", "untaps creatures", "untaps lands"];
+	var GREEN_SECONDARY = ["prevents attacks", "draws cards", "filters cards", "changes colors", "counters activated/triggered abilities", "gives your team +N/+N for a turn", "gives your team +N/+N permanently", "draws cards based on damage", "uses deathtouch", "uses defender", "draws cards based on enchantments (enchantress effects)", "uses hexproof", "uses indestructible", "destroys lands", "destroys noncreature permanents", "destroys planeswalkers", "plays creatures off the top of your library", "puts enchantments from your hand into play", "renimates creatures", "uses scry", "uses vigilance", "uses / power and toughness"];
+	var GREEN_TERTIARY = ["grants +N+0", "grants -N/-N", "uses haste", "uses flying (while still being green)", "uses protection"];
 	
 	var GREEN_ABILITIES = [GREEN_PRIMARY, GREEN_SECONDARY, GREEN_TERTIARY];
 	
